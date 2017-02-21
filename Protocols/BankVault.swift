@@ -20,6 +20,31 @@ class BankVault {
     
 }
 
+protocol ProvideAccess {
+    func allowEntryWithPassword(_ password: [Int]) -> Bool
+}
+
+extension BankVault: ProvideAccess {
+    func allowEntryWithPassword(_ password: [Int]) -> Bool {
+        var enter: Bool = false
+        
+        if password.isEmpty {
+            enter = false
+        } else if password.count > 10 {
+            enter = false
+        } else {
+            for pass in password {
+                if pass % 2 == 0 {
+                    enter = true
+                }
+                return enter
+            }
+        }
+        return enter
+    }
+}
+
+
 
 
 
